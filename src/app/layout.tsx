@@ -3,7 +3,9 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import Navbar from "./component/Navbar";
 import Footer from "./component/Footer";
-import { CartProvider } from "./context/page";
+import CartProvider from "./context/page";
+import { CartContext } from "../context/CartContext";
+
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,9 +20,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <body className="flex flex-col min-h-screen">
               <Navbar />
               <main className="flex-1">
-                <CartProvider>
+              <CartContext.Provider value={{ cart: [], addToCart: () => {}, removeFromCart: () => {} }}> {/* ✅ Wrap the entire app with CartProvider */}
                  {children}
-             </CartProvider></main>
+                 </CartContext.Provider>
+             </main>
               <Footer />
           </body>
       </html>

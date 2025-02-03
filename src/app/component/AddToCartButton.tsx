@@ -1,7 +1,5 @@
-"use client";
-
-import { useCart } from "../context/page";
-
+import { useContext } from 'react';
+import { CartContext } from '../../context/CartContext';
 
 interface Product {
   id: number;
@@ -10,7 +8,13 @@ interface Product {
 }
 
 export default function AddToCartButton({ product }: { product: Product }) {
-  const { addToCart } = useCart();
+  const cartContext = useContext(CartContext);
+
+  if (!cartContext) {
+    throw new Error('CartContext must be used within a CartProvider');
+  }
+
+  const { addToCart } = cartContext;
 
   return (
     <button 
@@ -21,3 +25,4 @@ export default function AddToCartButton({ product }: { product: Product }) {
     </button>
   );
 }
+

@@ -17,7 +17,7 @@ const products = [
   ];
 
 export default function ProductsPage() {
-  const { addToCart } = useCart();
+  const { addToCart } = useCart([]);
 
   return (
     <div className=" max-w-screen p-8 px-auto bg-slate-300">
